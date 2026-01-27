@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: multichat_db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=GucluSifre123! 
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlvolume:/var/opt/mssql 
+    networks:
+      - chat-network
+
+ 
+  backend:
+    build:
+      context: ./MultiAiChat.Api 
+      dockerfile: Dockerfile
+    container_name: multichat_backend
+    depends_on:
+      - db 
+    ports:
+      - "7050:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Database=MultiAiChatDb;User Id=sa;Password=${SQL_PASSWORD};TrustServerCertificate=True;
+      - AiSettings__GeminiApiKey=${GEMINI_API_KEY}
+      - AiSettings__OpenAiApiKey=${OPENAI_API_KEY}
+    networks:
+      - chat-network
+
+  frontend:
+    build:
+      context: ./client 
+      dockerfile: Dockerfile
+    container_name: multichat_frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+    networks:
+      - chat-network
+
+volumes:
+  sqlvolume:
+
+networks:
+  chat-network:
+    driver: bridge
