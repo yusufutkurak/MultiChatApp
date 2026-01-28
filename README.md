@@ -18,7 +18,7 @@ Projeyi sorunsuz test edebilmeniz ve API anahtarı (Gemini/OpenAI Key) alma sür
 
 **1. Repoyu Klonlayın:**
 ```bash
-git clone [https://github.com/yusufutkurak/MultiChatApp.git](https://github.com/yusufutkurak/MultiChatApp.git)
+git clone git clone https://github.com/yusufutkurak/MultiChatApp
 cd MultiChatApp
 ```
 
