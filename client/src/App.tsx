@@ -22,7 +22,7 @@ function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   
-  const [selectedModel, setSelectedModel] = useState("gemini-3-flash-preview");
+  const [selectedModel, setSelectedModel] = useState("gemini-2.5-flash");
   const [isModelDropdownOpen, setIsModelDropdownOpen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
